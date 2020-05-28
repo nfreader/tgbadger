@@ -1,6 +1,13 @@
 <?php 
 
 require_once(__DIR__."/../config.php");
+$password = filter_input(INPUT_GET,'password',FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+if(!$_SESSION['pass']){
+  if(PASSWORD && !$password) die("Password is required for this page");
+  if(!password_verify($password,password_hash(PASSWORD, PASSWORD_DEFAULT))) die("Password is incorrect");
+}
+
+$_SESSION['pass'] = TRUE;
 
 if($iconfile = filter_input(INPUT_GET,'icon', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH)){
   header('Content-Type: application/json');
