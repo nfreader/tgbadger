@@ -14,7 +14,7 @@ if($iconfile = filter_input(INPUT_GET,'icon', FILTER_SANITIZE_STRING, FILTER_FLA
   if(strpos($iconfile, '..') !== FALSE || strpos($iconfile, ICON_DIR) === FALSE || !is_file($iconfile)){
     die(json_encode(['msg'=>'Invalid icon file']));
   }
-  require_once(__DIR__."/../src/PNGMetaDataExtractor.php");
+  require_once(__DIR__."/../src/PNGMetadataExtractor.php");
   $png = new PNGMetaDataExtractor();
   $dest = str_replace(ICON_DIR, OUTPUT_DIR, explode('.', $iconfile)[0]);
   if(!is_dir($dest)) {
