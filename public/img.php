@@ -2,9 +2,9 @@
 error_reporting(0);
 
 header('Content-Type: application/json');
-define("BIO_RESOURCES",__DIR__.'/../resources/bio/');
 define("ICON_PATH",OUTPUT_DIR."/mob");
-define("CONSOLAS_FONT",__DIR__.'/../resources/bio/cascadia.otf');
+define("BIO_RESOURCES",__DIR__.'/resources/bio/');
+define("CONSOLAS_FONT",BIO_RESOURCES.'/cascadia.otf');
 
 $args = [
   'bg' => [
