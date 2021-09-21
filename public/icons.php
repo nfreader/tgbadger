@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 
 require_once(__DIR__."/../config.php");
 $password = filter_input(INPUT_GET, 'password', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
