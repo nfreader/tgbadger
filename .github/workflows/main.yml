@@ -34,7 +34,7 @@ jobs:
             sudo rm -rf /var/www/badger.atlantaned.space/public/*
             echo "Moving newer assets into public directory..."
             sudo mv /var/www/badger.atlantaned.space/badger/public/* /var/www/badger.atlantaned.space/public/
-            sudo mv /var/www/atlantaned.space/config.php /var/www/badger.atlantaned.space/badger/config.php
+            sudo mv /var/www/badger.atlantaned.space/config.php /var/www/badger.atlantaned.space/badger/config.php
             echo "Updating index script location..."
             sudo sed -i 's/\/..\//\/..\/badger\//' /var/www/badger.atlantaned.space/public/index.php
             sudo sed -i 's/\/..\//\/..\/badger\//' /var/www/badger.atlantaned.space/public/icons.php
