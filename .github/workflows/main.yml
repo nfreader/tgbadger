@@ -36,9 +36,9 @@ jobs:
             sudo mv /var/www/badger.atlantaned.space/badger/public/* /var/www/badger.atlantaned.space/public/
             sudo mv /var/www/badger.atlantaned.space/config.php /var/www/badger.atlantaned.space/badger/config.php
             echo "Updating index script location..."
-            sudo sed -i 's/\/..\//\/..\/badger\//' /var/www/badger.atlantaned.space/public/index.php
-            sudo sed -i 's/\/..\//\/..\/badger\//' /var/www/badger.atlantaned.space/public/icons.php
-            sudo sed -i 's/\/..\//\/..\/badger\//' /var/www/badger.atlantaned.space/public/json_merge.php
+            sudo sed -i 's/__DIR__.\"\/..\//__DIR__.\"\/..\/badger\//' /var/www/badger.atlantaned.space/public/index.php
+            sudo sed -i 's/__DIR__.\"\/..\//__DIR__.\"\/..\/badger\//' /var/www/badger.atlantaned.space/public/icons.php
+            sudo sed -i 's/__DIR__.\"\/..\//__DIR__.\"\/..\/badger\//' /var/www/badger.atlantaned.space/public/json_merge.php
             echo "Restoring file ownership..."
             sudo chown -R www-data:www-data /var/www/badger.atlantaned.space
             echo "Done!"
