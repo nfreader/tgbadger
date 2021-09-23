@@ -130,6 +130,7 @@ require_once(__DIR__."/../config.php");
                 <option value="cmo">Chief Medical Officer</option>
                 <option value="rd">Research Director</option>
                 <option value="qm">Quartermaster</option>
+                <option value="chap">Chaplain</option>
                 <option value="ok">Approved</option>
                 <option value="deny">Denied</option>
                 <option value="clown">Clown</option>
