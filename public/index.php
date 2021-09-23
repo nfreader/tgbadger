@@ -441,7 +441,7 @@ require_once(__DIR__."/../config.php");
         </div>
       </div>
 
-      <button class="btn btn-success btn-block">Render</button>
+      <button class="btn btn-success btn-block btn-lg mt-3">Render</button>
     </form>
     <hr />
     <footer>
