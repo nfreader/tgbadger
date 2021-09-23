@@ -84,7 +84,7 @@ require_once(__DIR__."/../config.php");
         <img src="/icons/mob/human/human_basic-0.png" width="64" height="64" class="body" />
       </div>
       <div class="col">
-        <textarea id="json_out" class="form-control"></textarea>
+        <input id="json_out" class="form-control"></input>
       </div>
     </div>
     <hr>
@@ -131,7 +131,7 @@ require_once(__DIR__."/../config.php");
             <label for="stamp" class="col-md-3">Stamp</label>
             <div class="col-md-9">
               <select name="stamp" class="form-control field stamp">
-                <option value="none">None</option>
+                <option value="0">None</option>
                 <option value="cap">Captain</option>
                 <option value="ce">Chief Engineer</option>
                 <option value="hop">Head of Personnel</option>
@@ -141,6 +141,9 @@ require_once(__DIR__."/../config.php");
                 <option value="ok">Approved</option>
                 <option value="deny">Denied</option>
                 <option value="clown">Clown</option>
+                <option value="mime">Mime</option>
+                <option value="centcom">Centcom</option>
+                <option value="syndicate">Syndicate</option>
               </select>
             </div>
           </div>
@@ -696,8 +699,25 @@ require_once(__DIR__."/../config.php");
       }
       return true;
     }
-    $('.field').on('change', function(e) {
-      $('#generator').submit();
+    $('.field').bind('input propertychange', function(e) {
+      // $('#generator').submit();
+      var data = {};
+      $('.field').each(function() {
+        data[$(this).attr("name")] = $(this).val();
+      });
+      data['gender'] = $('input[name=gender]:checked').val();
+      data['skinTone'] = $('input[name=skinTone]:checked').val();
+      $('#json_out').val(JSON.stringify(data));
+      $.ajax({
+          url: 'img.php',
+          data: JSON.parse($('#json_out').val()),
+          method: 'POST',
+          dataType: 'json'
+        })
+        .done(function(i) {
+          $('.render').attr('src', 'data:image/png;base64,' + i.bio);
+          $('.body').attr('src', 'data:image/png;base64,' + i.body);
+        })
     })
     $('#generator').submit(function(e) {
       e.preventDefault();
@@ -721,13 +741,13 @@ require_once(__DIR__."/../config.php");
     })
     $('#generator').submit();
 
-    // $("#json_out").bind('input propertychange', function(e) {
-    //   data = JSON.parse($(this).val());
-    //   Object.keys(data).map(function(_) {
-    //     console.log(_)
-    //     console.log(data[_]);
-    //   })
-    // })
+    $("#json_out").bind('input propertychange', function(e) {
+      data = JSON.parse($(this).val());
+      Object.keys(data).map(function(_) {
+        console.log(_)
+        console.log(data[_]);
+      })
+    })
 
     setInterval(function() {
       var clock = document.querySelector('#clock');
