@@ -226,7 +226,7 @@ require_once(__DIR__."/../config.php");
             </div>
             <div class="col-md-6">
               <label for="hairColor" class="form-label">Color</label>
-              <div class="col-md-9">
+              <div>
                 <input type='color' class='form-control field c' name='hairColor' id='hairColor' value="#ffe599">
               </div>
             </div>
