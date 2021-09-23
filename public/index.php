@@ -216,11 +216,7 @@ require_once(__DIR__."/../config.php");
                     <input name="hairStyle" id='hairStyle' type="search" placeholder="Hair style" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
             </div>
@@ -240,11 +236,7 @@ require_once(__DIR__."/../config.php");
                     <input name="eyeWear" id='eyeWear' type="search" placeholder="Eye Wear" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
             </div>
@@ -256,11 +248,7 @@ require_once(__DIR__."/../config.php");
                     <input name="mask" id='mask' type="search" placeholder="Mask" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
             </div>
@@ -274,11 +262,7 @@ require_once(__DIR__."/../config.php");
                     <input name="uniform" id='uniform' type="search" placeholder="Uniform" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
             </div>
@@ -290,11 +274,7 @@ require_once(__DIR__."/../config.php");
                     <input name="suit" id='suit' type="search" placeholder="Suit" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
             </div>
@@ -308,11 +288,7 @@ require_once(__DIR__."/../config.php");
                     <input name="head" id='head' type="search" placeholder="Head" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
             </div>
@@ -324,11 +300,7 @@ require_once(__DIR__."/../config.php");
                     <input name="belt" id='belt' type="search" placeholder="Belt" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
             </div>
@@ -344,11 +316,7 @@ require_once(__DIR__."/../config.php");
                     <input name="gloves" id='gloves' type="search" placeholder="Gloves" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
             </div>
@@ -360,11 +328,7 @@ require_once(__DIR__."/../config.php");
                     <input name="shoes" id='shoes' type="search" placeholder="Shoes" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
             </div>
@@ -378,11 +342,7 @@ require_once(__DIR__."/../config.php");
                     <input name="lhand" id='lhand' type="search" placeholder="Left Hand" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
             </div>
@@ -394,11 +354,7 @@ require_once(__DIR__."/../config.php");
                     <input name="rhand" id='rhand' type="search" placeholder="Right Hand" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
             </div>
@@ -412,11 +368,7 @@ require_once(__DIR__."/../config.php");
                     <input name="back" id='back' type="search" placeholder="Back" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
             </div>
@@ -428,11 +380,7 @@ require_once(__DIR__."/../config.php");
                     <input name="neck" id='neck' type="search" placeholder="Neck" autocomplete="off"
                       class='form-control field c'>
                   </span>
-                  <span class="typeahead__button">
-                    <button type="submit">
-                      <i class="typeahead__search-icon"></i>
-                    </button>
-                  </span>
+
                 </div>
               </div>
 
