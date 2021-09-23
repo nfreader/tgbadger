@@ -118,10 +118,10 @@ $default->species   = 'human';
 $default->gender    = 'male';
 $default->skinTone  = 'caucasian1';
 $default->eyeColor  = '#6aa84f';
-$default->hairStyle = 'bald_s';
+$default->hairStyle = 'bald';
 $default->eyeWear   = false;
 $default->mask      = false;
-$default->uniform   = 'grey_s';
+$default->uniform   = '/color/grey_ancient';
 $default->suit      = false;
 $default->head      = false;
 $default->belt      = false;
@@ -141,7 +141,6 @@ foreach ($data as $k => $v) {
         $data->$k = $default->$k;
     }
 }
-
 
 //DIMENSIONS AND DEFAULTS
 $bioW = 320;
@@ -245,7 +244,7 @@ imagefilledrectangle($image, $mugshot_offset_x+$pixelxoffset, $mugshot_offset_y+
 $clothing = true;
 $path = ICON_PATH."/human_parts_greyscale";
 
-function getSpeciesSprites($species, $gender='male', $dir='0', $path)
+function getSpeciesSprites($species, $gender='male', $dir='0', $path = '')
 {
     $sprites = array(
     "rArm"=>"$path/".$species."_r_arm-$dir.png",
@@ -523,6 +522,25 @@ if (!$clothing) {
         imagedestroy($lhand);
     }
 
+    //BACK
+    if ($clothing && $data->back) {
+        $back = imagecreatefrompng(ICON_PATH."/clothing/back/".$data->back."-".$data->dir.".png");
+        if (null != $back) {
+            imagecopy($body, $back, 0, 0, 0, 0, 32, 32);
+        }
+        imagedestroy($back);
+    }
+
+    //NECK
+    if ($clothing && $data->neck) {
+        $neck = imagecreatefrompng(ICON_PATH."/clothing/neck/".$data->neck."-".$data->dir.".png");
+        if (null != $neck) {
+            imagecopy($body, $neck, 0, 0, 0, 0, 32, 32);
+        }
+        imagedestroy($neck);
+    }
+
+
     //RIGHT HAND
     if ($clothing && $data->rhand) {
         $rhand = imagecreatefrompng(ICON_PATH."/inhands/".$data->rhand."-".$data->dir.".png");
@@ -548,24 +566,6 @@ if (!$clothing) {
             imagecopy($body, $shoes, 0, 0, 0, 0, 32, 32);
         }
         imagedestroy($shoes);
-    }
-
-    //BACK
-    if ($clothing && $data->back) {
-        $back = imagecreatefrompng(ICON_PATH."/clothing/back/".$data->back."-".$data->dir.".png");
-        if (null != $back) {
-            imagecopy($body, $back, 0, 0, 0, 0, 32, 32);
-        }
-        imagedestroy($back);
-    }
-
-    //NECK
-    if ($clothing && $data->neck) {
-        $neck = imagecreatefrompng(ICON_PATH."/clothing/neck/".$data->neck."-".$data->dir.".png");
-        if (null != $neck) {
-            imagecopy($body, $neck, 0, 0, 0, 0, 32, 32);
-        }
-        imagedestroy($neck);
     }
 
     //SUIT
