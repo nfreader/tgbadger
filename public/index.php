@@ -451,8 +451,8 @@ require_once(__DIR__."/../config.php");
             <p>
               Support BadgeR on <a href="https://www.patreon.com/statbus" class="link" target="_blank"
                 rel="noopener noreferrer">Patreon</a>! Report bugs on <a href="https://github.com/nfreader/tgbadger
-" class="link" target="_blank" rel="noopener noreferrer">Github</a>! Check out <a href="https://github.com/nfreader/tgbadger
-" class="link" target="_blank" rel="noopener noreferrer">Statbus</a>!
+" class="link" target="_blank" rel="noopener noreferrer">Github</a>! Check out <a href="https://atlantaned.space"
+                class="link" target="_blank" rel="noopener noreferrer">Statbus</a>!
             </p>
           </div>
         </div>
