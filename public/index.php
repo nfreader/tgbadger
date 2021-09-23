@@ -98,9 +98,6 @@ require_once(__DIR__."/../config.php");
                 <option value="ice">Ice</option>
                 <option value="head">Head of Staff</option>
                 <option value="captain">Captain</option>
-                <?php if ($user->legit):?>
-                <option value="centcom">Central Command</option>
-                <?php endif;?>
               </select>
             </div>
           </div>
