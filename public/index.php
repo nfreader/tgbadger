@@ -203,6 +203,9 @@ require_once(__DIR__."/../config.php");
         <!-- Second form column -->
         <div class="col-md-6">
           <h3>Accessories</h3>
+          <p class="text-muted small mb-0 mt-2">Start typing the name of the object you want. Can't find what
+            you're looking for? Use <a href="https://scrubby.melonmesa.com/icon/search
+" class="link" target="_blank" rel="noopener noreferrer">Scrubby's Icon Search</a></p>
           <div class="row">
             <div class="col-md-6">
               <label for="hairStyle" class="form-label">Hair style</label>
@@ -328,6 +331,8 @@ require_once(__DIR__."/../config.php");
                 </div>
               </div>
             </div>
+            <p class="col-md-12 text-muted small mb-0 mt-2">Head gear clashing with your helmet? Set your hairstyle to
+              'bald'</p>
           </div>
           <div class="row">
             <div class="col-md-6">
