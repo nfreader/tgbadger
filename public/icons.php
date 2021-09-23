@@ -50,8 +50,8 @@ if ($iconfile = filter_input(INPUT_GET, 'icon', FILTER_SANITIZE_STRING, FILTER_F
                 fwrite($file, base64_decode($i));
                 fclose($file);
                 if ($_GET['show']) {
-                    $dest = str_replace("/src/app/public/", '', $dest);
-                    echo "<img src='$dest/".$icon['state']."-$dir.png' height=64 width=64 title='".$icon['state']."'>";
+                    $dest = str_replace(OUTPUT_DIR, '', $dest);
+                    echo "<img src='icons/$dest/".$icon['state']."-$dir.png' height=64 width=64 title='".$icon['state']."'>";
                 }
             }
             unset($img);
