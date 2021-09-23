@@ -2,6 +2,10 @@
 error_reporting(0);
 
 require_once(__DIR__."/../config.php");
+require_once(__DIR__."/../vendor/autoload.php");
+
+use App\DMISpriteExtractor;
+
 $password = filter_input(INPUT_GET, 'password', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 if (!$_SESSION['pass']) {
     if (PASSWORD && !$password) {
@@ -15,31 +19,45 @@ if (!$_SESSION['pass']) {
 $_SESSION['pass'] = true;
 $_SESSION['dests'] = [];
 if ($iconfile = filter_input(INPUT_GET, 'icon', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH)) {
-    header('Content-Type: application/json');
+    if (!$_GET['show']) {
+        header('Content-Type: application/json');
+    } else {
+        ?>
+<style>
+  img {
+    image-rendering: pixelated;
+  }
+</style>
+<?php
+    }
     if (strpos($iconfile, '..') !== false || strpos($iconfile, ICON_DIR) === false || !is_file($iconfile)) {
         die(json_encode(['msg'=>'Invalid icon file']));
     }
-    require_once(__DIR__."/../src/PNGMetadataExtractor.php");
-    $png = new PNGMetaDataExtractor();
+    $png = new DMISpriteExtractor();
     $dest = str_replace(ICON_DIR, OUTPUT_DIR, explode('.', $iconfile)[0]);
     if (!is_dir($dest)) {
         mkdir($dest, 0777, true);
         $_SESSION['dests'][] = $dest;
     }
+    $count = 0;
     try {
         $img = $png->loadImage($iconfile);
         foreach ($img as $icon) {
             $icons[] = $icon['state'];
             $count++;
-            // echo "<img src='data:image/png;base64, ".$icon['base64']."' />";
             foreach ($icon['dir'] as $dir => $i) {
                 $file = fopen("$dest/".$icon['state']."-$dir.png", 'w');
                 fwrite($file, base64_decode($i));
                 fclose($file);
+                if ($_GET['show']) {
+                    $dest = str_replace("/src/app/public/", '', $dest);
+                    echo "<img src='$dest/".$icon['state']."-$dir.png' height=64 width=64 title='".$icon['state']."'>";
+                }
             }
             unset($img);
         }
-        $jsonfile = end(explode('/', $dest));
+        $end = explode('/', $dest);
+        $jsonfile = end($end);
         $file = fopen("$dest/$jsonfile.json", 'w');
         fwrite($file, json_encode($icons));
         fclose($file);
@@ -88,6 +106,7 @@ if ($iconfile = filter_input(INPUT_GET, 'icon', FILTER_SANITIZE_STRING, FILTER_F
     integrity="sha256-ZdnRjhC/+YiBbXTHIuJdpf7u6Jh5D2wD5y0SNRWDREQ=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+
 </head>
 
 <body>
@@ -102,9 +121,13 @@ if ($iconfile = filter_input(INPUT_GET, 'icon', FILTER_SANITIZE_STRING, FILTER_F
 );
     foreach ($fileinfos as $pathname => $fileinfo) :
       if (strpos($pathname, '.dmi')) : ?>
-      <div class="list-group-item d-flex justify-content-between align-items-center"><?php echo $pathname;?><a
-          href="?icon=<?php echo $pathname;?>"
-          class="btn btn-primary render">Render</a></div>
+      <div class="list-group-item d-flex justify-content-between align-items-center"><?php echo $pathname;?>
+        <span><a href="?icon=<?php echo $pathname;?>"
+            class="btn btn-primary render">Render</a>
+          <a href="?icon=<?php echo $pathname;?>&show=true"
+            class="btn btn-info">View</a>
+        </span>
+      </div>
       <?php endif;
 endforeach;?>
     </div>
