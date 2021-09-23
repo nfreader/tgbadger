@@ -34,7 +34,7 @@ if ($iconfile = filter_input(INPUT_GET, 'icon', FILTER_SANITIZE_STRING, FILTER_F
         die(json_encode(['msg'=>'Invalid icon file']));
     }
     $png = new DMISpriteExtractor();
-    $dest = str_replace(ICON_DIR, OUTPUT_DIR, explode('.', $iconfile)[0]);
+    $dest = str_replace(ICON_DIR, OUTPUT_DIR, explode('.dmi', $iconfile)[0]);
     if (!is_dir($dest)) {
         mkdir($dest, 0777, true);
         $_SESSION['dests'][] = $dest;
