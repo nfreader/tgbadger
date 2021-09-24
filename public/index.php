@@ -73,7 +73,7 @@ require_once(__DIR__."/../config.php");
         margin-top: 7px;
       }
     </style>
-    <div class="row">
+    <div class="row mb-2">
       <div class="col d-flex justify-content-center position-sticky sticky-top" id="output">
         <img src="/resources/bio/bg/fresh.png" width="320" height="65" class="render" />
         <img src="/icons/mob/human/human_basic-0.png" width="64" height="64" class="body" />
@@ -84,7 +84,7 @@ require_once(__DIR__."/../config.php");
     </div>
     <hr>
     <form class="form-horizontal" id="generator">
-      <div class="row">
+      <div class="row mb-2">
         <div class="col-md-6">
           <h3>Badge Appearance</h3>
           <div class="form-group row">
@@ -207,9 +207,9 @@ require_once(__DIR__."/../config.php");
           <p class="text-muted small mb-0 mt-2">Start typing the name of the object you want. Can't find what
             you're looking for? Use <a href="https://scrubby.melonmesa.com/icon/search
 " class="link" target="_blank" rel="noopener noreferrer">Scrubby's Icon Search</a></p>
-          <div class="row">
+          <div class="row mb-2">
             <div class="col-md-6">
-              <label for="hairStyle" class="form-label">Hair style</label>
+              <label for="hairStyle" class="form-label d-none">Hair style</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
@@ -221,15 +221,34 @@ require_once(__DIR__."/../config.php");
               </div>
             </div>
             <div class="col-md-6">
-              <label for="hairColor" class="form-label">Color</label>
+              <label for="hairColor" class="form-label d-none">Color</label>
               <div>
                 <input type='color' class='form-control field c' name='hairColor' id='hairColor' value="#ffe599">
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <div class="col-md-6">
-              <label for="eyeWear" class="form-label">Eyewear</label>
+              <label for="facial" class="form-label d-none">Facial Hair</label>
+              <div class="typeahead__container">
+                <div class="typeahead__field">
+                  <span class="typeahead__query">
+                    <input name="facial" id='facial' type="search" placeholder="Facial Hair" autocomplete="off"
+                      class='form-control field c'>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="facialColor" class="form-label d-none">Color</label>
+              <div>
+                <input type='color' class='form-control field c' name='facialColor' id='facialColor' value="#ffe599">
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <label for="eyeWear" class="form-label d-none">Eyewear</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
@@ -241,7 +260,7 @@ require_once(__DIR__."/../config.php");
               </div>
             </div>
             <div class="col-md-6">
-              <label for="mask" class="form-label">Mask</label>
+              <label for="mask" class="form-label d-none">Mask</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
@@ -253,9 +272,9 @@ require_once(__DIR__."/../config.php");
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <div class="col-md-6">
-              <label for="uniform" class="form-label">Uniform</label>
+              <label for="uniform" class="form-label d-none">Uniform</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
@@ -267,7 +286,7 @@ require_once(__DIR__."/../config.php");
               </div>
             </div>
             <div class="col-md-6">
-              <label for="suit" class="form-label">Suit</label>
+              <label for="suit" class="form-label d-none">Suit</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
@@ -279,9 +298,9 @@ require_once(__DIR__."/../config.php");
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <div class="col-md-6">
-              <label for="head" class="form-label">Helmet/Head</label>
+              <label for="head" class="form-label d-none">Helmet/Head</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
@@ -293,7 +312,7 @@ require_once(__DIR__."/../config.php");
               </div>
             </div>
             <div class="col-md-6">
-              <label for="belt" class="form-label">Belt</label>
+              <label for="belt" class="form-label d-none">Belt</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
@@ -307,9 +326,9 @@ require_once(__DIR__."/../config.php");
             <p class="col-md-12 text-muted small mb-0 mt-2">Head gear clashing with your helmet? Set your hairstyle to
               'bald'</p>
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <div class="col-md-6">
-              <label for="gloves" class="form-label">Gloves</label>
+              <label for="gloves" class="form-label d-none">Gloves</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
@@ -321,7 +340,7 @@ require_once(__DIR__."/../config.php");
               </div>
             </div>
             <div class="col-md-6">
-              <label for="shoes" class="form-label">Shoes</label>
+              <label for="shoes" class="form-label d-none">Shoes</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
@@ -333,9 +352,9 @@ require_once(__DIR__."/../config.php");
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <div class="col-md-6">
-              <label for="lhand" class="form-label">Left Hand</label>
+              <label for="lhand" class="form-label d-none">Left Hand</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
@@ -347,7 +366,7 @@ require_once(__DIR__."/../config.php");
               </div>
             </div>
             <div class="col-md-6">
-              <label for="rhand" class="form-label">Right Hand</label>
+              <label for="rhand" class="form-label d-none">Right Hand</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
@@ -359,9 +378,9 @@ require_once(__DIR__."/../config.php");
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <div class="col-md-6">
-              <label for="back" class="form-label">Back</label>
+              <label for="back" class="form-label d-none">Back</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
@@ -373,19 +392,54 @@ require_once(__DIR__."/../config.php");
               </div>
             </div>
             <div class="col-md-6">
-              <label for="neck" class="form-label">Neck</label>
+              <label for="neck" class="form-label d-none">Neck</label>
               <div class="typeahead__container">
                 <div class="typeahead__field">
                   <span class="typeahead__query">
                     <input name="neck" id='neck' type="search" placeholder="Neck" autocomplete="off"
                       class='form-control field c'>
                   </span>
-
                 </div>
               </div>
-
             </div>
           </div>
+          <div class="row mb-2" id="moth">
+            <div class="col-md-6">
+              <label for="wings" class="form-label d-none">Wings</label>
+              <div class="typeahead__container">
+                <div class="typeahead__field">
+                  <span class="typeahead__query">
+                    <input name="wings" id='wings' type="search" placeholder="Wings" autocomplete="off"
+                      class='form-control field c'>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="antennae" class="form-label d-none">Antennae</label>
+              <div class="typeahead__container">
+                <div class="typeahead__field">
+                  <span class="typeahead__query">
+                    <input name="antennae" id='antennae' type="search" placeholder="Antennae" autocomplete="off"
+                      class='form-control field c'>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row mb-2">
+            <div class="col-md-6">
+              <label for="hud" class="form-label d-none">HUD Icon</label>
+              <div class="typeahead__container">
+                <div class="typeahead__field">
+                  <span class="typeahead__query">
+                    <input name="hud" id='hud' type="search" placeholder="Hud" autocomplete="off"
+                      class='form-control field c'>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div> -->
         </div>
       </div>
 
@@ -393,7 +447,7 @@ require_once(__DIR__."/../config.php");
     </form>
     <hr />
     <footer>
-      <div class="row">
+      <div class="row mb-2">
         <div class="col-md-4">
           <div class="page-footer">
             <h3>BadgeR</h3>
@@ -419,294 +473,7 @@ require_once(__DIR__."/../config.php");
       </div>
     </footer>
   </div>
-  <script>
-    var colorPalette = [
-      ["#000", "#444", "#666", "#999", "#ccc", "#eee", "#f3f3f3", "#fff"],
-      ["#f00", "#f90", "#ff0", "#0f0", "#0ff", "#00f", "#90f", "#f0f"],
-      ["#f4cccc", "#fce5cd", "#fff2cc", "#d9ead3", "#d0e0e3", "#cfe2f3", "#d9d2e9", "#ead1dc"],
-      ["#ea9999", "#f9cb9c", "#ffe599", "#b6d7a8", "#a2c4c9", "#9fc5e8", "#b4a7d6", "#d5a6bd"],
-      ["#e06666", "#f6b26b", "#ffd966", "#93c47d", "#76a5af", "#6fa8dc", "#8e7cc3", "#c27ba0"],
-      ["#c00", "#e69138", "#f1c232", "#6aa84f", "#45818e", "#3d85c6", "#674ea7", "#a64d79"],
-      ["#900", "#b45f06", "#bf9000", "#38761d", "#134f5c", "#0b5394", "#351c75", "#741b47"],
-      ["#600", "#783f04", "#7f6000", "#274e13", "#0c343d", "#073763", "#20124d", "#4c1130"]
-    ]
-
-    // $('#eyeColor').spectrum({
-    //   // showInput: true,
-    //   // allowEmpty:true,
-    //   // showPaletteOnly: true,
-    //   // change: function(color) {
-    //   //   $('input[name=eyeColor]').val(color);
-    //   // },
-    //   // preferredFormat: 'hex',
-    //   palette: colorPalette
-    // });
-    // $('#hairColor').spectrum({
-    //   showPalette: true,
-    //   preferredFormat: 'hex'
-    // });
-
-    var humanSkintones = {
-      "caucasian1": "#ffe0d1",
-      "caucasian2": "#fcccb3",
-      "caucasian3": "#e8b59b",
-      "latino": "#d9ae96",
-      "mediterranean": "#c79b8b",
-      "asian1": "#ffdeb3",
-      "asian2": "#e3ba84",
-      "arab": "#c4915e",
-      "indian": "#b87840",
-      "african1": "#754523",
-      "african2": "#471c18",
-      "albino": "#fff4e6",
-      "orange": "#ffc905"
-    };
-
-    $.each(humanSkintones, function(i, v) {
-      var option = "<input type='radio' name='skinTone' value='" + i + "' class='field c' id='skintone-" + i +
-        "'><label for='skintone-" + i + "' style='background: " + v + "'></label>";
-      $('#skintone').append(option);
-    });
-
-    // $('#hairStyle').typeahead({
-    //   order: 'asc',
-    //   searchOnFocus: true,
-    //   minLength: 0,
-    //   source: {
-    //     hair: '../icons/human_face/human_face.json'
-    //   },
-    //   backdrop: {
-    //     "background-color": "#3879d9",
-    //     "opacity": "0.1",
-    //     "filter": "alpha(opacity=10)"
-    //   },
-    //   callback: {
-    //     onInit: function (node) {
-    //       console.log('Typeahead Initiated on ' + node.selector);
-    //     }
-    //   },
-    //   debug: true
-    // });
-
-    var typeahead_options = {
-      minLength: 1,
-      order: "asc",
-      mustSelectItem: true,
-      searchOnFocus: true,
-      dynamic: true,
-      maxItem: 0,
-      callback: {
-        onClickAfter: function(node, a, item, event) {
-          $('#generator').submit();
-        }
-      }
-    }
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#hairStyle',
-      matcher: function(item, displayKey) {
-        if (item.display.includes('hair') || item.display.includes('bald') || item.display.includes(
-            'debrained')) {
-          return true;
-        } else {
-          return undefined;
-        }
-        return true;
-      },
-      source: {
-        hair: "/icons/mob/human_face/human_face.json"
-      }
-    });
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#eyeWear',
-      source: {
-        eyeWear: "/icons/mob/clothing/eyes/eyes.json"
-      }
-    });
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#mask',
-      source: {
-        uniform: "/icons/mob/clothing/mask/mask.json"
-      },
-    });
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#uniform',
-      source: {
-        uniform: "/icons/mob/clothing/under/under.json"
-      },
-    });
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#suit',
-      source: {
-        suit: "/icons/mob/clothing/suit/suit.json"
-      },
-    });
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#head',
-      source: {
-        head: "/icons/mob/clothing/head/head.json"
-      },
-    });
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#belt',
-      source: {
-        head: "/icons/mob/clothing/belt/belt.json"
-      },
-    });
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#gloves',
-      source: {
-        head: "/icons/mob/clothing/hands/hands.json"
-      },
-    });
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#shoes',
-      source: {
-        head: "/icons/mob/clothing/feet/feet.json"
-      },
-    });
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#back',
-      source: {
-        head: "/icons/mob/clothing/back/back.json"
-      },
-    });
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#neck',
-      source: {
-        head: "/icons/mob/clothing/neck/neck.json"
-      },
-    });
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#lhand',
-      matcher: function(item, key) {
-        if (/left/.test(key)) {
-          return true
-        } else {
-          return false
-        }
-      },
-      source: {
-        items: "/icons/mob/inhands/inhands.json",
-      },
-    });
-
-    $.typeahead({
-      ...typeahead_options,
-      input: '#rhand',
-      matcher: function(item, key) {
-        if (/right/.test(key)) {
-          return true
-        } else {
-          return false
-        }
-      },
-      source: {
-        items: "/icons/mob/inhands/inhands.json",
-      },
-    });
-
-    //Form processing
-    var clothedSpecies = [
-      'human',
-      'lizard',
-      'pod',
-      'jelly',
-      'slime',
-      'golem',
-    ];
-
-    function arrayContains(needle, arrhaystack) {
-      if (arrhaystack.indexOf(needle) > -1) {
-        return false;
-      }
-      return true;
-    }
-    $('.field').bind('input propertychange', function(e) {
-      // $('#generator').submit();
-      var data = {};
-      $('.field').each(function() {
-        data[$(this).attr("name")] = $(this).val();
-      });
-      data['gender'] = $('input[name=gender]:checked').val();
-      data['skinTone'] = $('input[name=skinTone]:checked').val();
-      $('#json_out').val(JSON.stringify(data));
-      $.ajax({
-          url: 'img.php',
-          data: JSON.parse($('#json_out').val()),
-          method: 'POST',
-          dataType: 'json'
-        })
-        .done(function(i) {
-          $('.render').attr('src', 'data:image/png;base64,' + i.bio);
-          $('.body').attr('src', 'data:image/png;base64,' + i.body);
-        })
-    })
-    $('#generator').submit(function(e) {
-      e.preventDefault();
-      var data = {};
-      $('.field').each(function() {
-        data[$(this).attr("name")] = $(this).val();
-      });
-      data['gender'] = $('input[name=gender]:checked').val();
-      data['skinTone'] = $('input[name=skinTone]:checked').val();
-      $('#json_out').val(JSON.stringify(data));
-      $.ajax({
-          url: 'img.php',
-          data: JSON.parse($('#json_out').val()),
-          method: 'POST',
-          dataType: 'json'
-        })
-        .done(function(i) {
-          $('.render').attr('src', 'data:image/png;base64,' + i.bio);
-          $('.body').attr('src', 'data:image/png;base64,' + i.body);
-        })
-    })
-    $('#generator').submit();
-
-    $("#json_out").bind('input propertychange', function(e) {
-      data = JSON.parse($(this).val());
-      Object.keys(data).map(function(_) {
-        console.log(_)
-        console.log(data[_]);
-      })
-    })
-
-    setInterval(function() {
-      var clock = document.querySelector('#clock');
-      var date = new Date();
-      var month = ('0' + (date.getUTCMonth() + 1)).slice(-2);
-      var days = ('0' + date.getUTCDate() + '').slice(-2);
-      var seconds = ('0' + date.getUTCSeconds() + '').slice(-2);
-      var minutes = ('0' + date.getUTCMinutes() + '').slice(-2);
-      var hours = ('0' + date.getUTCHours() + '').slice(-2);
-      var year = date.getUTCFullYear();
-      clock.textContent = hours + ':' + minutes + ':' + seconds + ' ' + days + '.' + month + '.' + year;
-    }, 1000);
-  </script>
+  <script src="resources/js/app.js"></script>
 </body>
 
 </html>

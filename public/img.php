@@ -44,6 +44,14 @@ $args = [
     'filter' => FILTER_SANITIZE_STRING,
     'flags' => FILTER_FLAG_STRIP_HIGH
   ],
+  'facial' => [
+    'filter' => FILTER_SANITIZE_STRING,
+    'flags' => FILTER_FLAG_STRIP_HIGH
+  ],
+  'facialColor' => [
+    'filter' => FILTER_SANITIZE_STRING,
+    'flags' => FILTER_FLAG_STRIP_HIGH
+  ],
   'eyeWear' => [
     'filter' => FILTER_SANITIZE_STRING,
     'flags' => FILTER_FLAG_STRIP_HIGH
@@ -92,6 +100,14 @@ $args = [
     'filter' => FILTER_SANITIZE_STRING,
     'flags' => FILTER_FLAG_STRIP_HIGH
   ],
+  'wings' => [
+    'filter' => FILTER_SANITIZE_STRING,
+    'flags' => FILTER_FLAG_STRIP_HIGH
+  ],
+  'antennae' => [
+    'filter' => FILTER_SANITIZE_STRING,
+    'flags' => FILTER_FLAG_STRIP_HIGH
+  ],
   'text1' => [
     'filter' => FILTER_SANITIZE_STRING,
     'flags' => FILTER_FLAG_STRIP_HIGH
@@ -108,6 +124,10 @@ $args = [
     'filter' => FILTER_SANITIZE_STRING,
     'flags' => FILTER_FLAG_STRIP_HIGH
   ],
+  'hud' => [
+    'filter' => FILTER_SANITIZE_STRING,
+    'flags' => FILTER_FLAG_STRIP_HIGH
+  ],
 ];
 
 $data = (object) filter_input_array(INPUT_POST, $args, true);
@@ -120,6 +140,8 @@ $default->gender    = 'male';
 $default->skinTone  = 'caucasian1';
 $default->eyeColor  = '#6aa84f';
 $default->hairStyle = 'bald';
+$default->facial    = false;
+$default->facialColor  = '#6aa84f';
 $default->eyeWear   = false;
 $default->mask      = false;
 $default->uniform   = '/color/grey_ancient';
@@ -136,7 +158,9 @@ $default->text1     = "A. Spaceman";
 $default->text2     = "Bottom Text";
 $default->text3     = "Employee of Nanotrasen";
 $default->stamp     = false;
-
+$default->wings     = false;
+$default->antennae  = false;
+$default->hud       = false;
 foreach ($data as $k => $v) {
     if (empty($data->$k) || !isset($data->$k)) {
         $data->$k = $default->$k;
@@ -346,6 +370,7 @@ switch ($data->species) {
 
   case 'moth':
     $sprites = getSpeciesSprites('moth', $data->gender, $data->dir, ICON_PATH."/human_parts");
+    $species = 'moth';
   break;
 
   case 'fly':
@@ -366,10 +391,29 @@ if (!$clothing) {
     imagesavealpha($body, true);
 } else {
     //Create the canvas for the mob
+    
     $body = imagecreatetruecolor(32, 32);
     imagesavealpha($body, true);
     $alpha = imagecolorallocatealpha($body, 0, 0, 0, 127);
     imagefill($body, 0, 0, $alpha);
+
+    //Moth Wings and Antennae render BEHIND the body
+    if ('moth' === $species && $data->wings) {
+        $data->wings = "m_moth_wings_{$data->wings}_BEHIND";
+        $wings = imagecreatefrompng(ICON_PATH."/moth_wings/".$data->wings."-".$data->dir.".png");
+        if (null != $wings) {
+            imagecopy($body, $wings, 0, 0, 0, 0, 32, 32);
+        }
+        imagedestroy($wings);
+    }
+    if ('moth' === $species && $data->antennae) {
+        $data->antennae = "m_moth_antennae_{$data->antennae}_BEHIND";
+        $antennae = imagecreatefrompng(ICON_PATH."/moth_antennae/".$data->antennae."-".$data->dir.".png");
+        if (null != $antennae) {
+            imagecopy($body, $antennae, 0, 0, 0, 0, 32, 32);
+        }
+        imagedestroy($antennae);
+    }
 
     $head  = imagecreatefrompng($sprites['head']);
     $chest = imagecreatefrompng($sprites['chest']);
@@ -423,7 +467,9 @@ if (!$clothing) {
     }
 
     imagefilter($body, IMG_FILTER_NEGATE);
-    imagefilter($body, IMG_FILTER_COLORIZE, $skinTone[0], $skinTone[1], $skinTone[2], $skinToneOpacity);
+    if ('human' === $species) {
+        imagefilter($body, IMG_FILTER_COLORIZE, $skinTone[0], $skinTone[1], $skinTone[2], $skinToneOpacity);
+    }
     imagefilter($body, IMG_FILTER_NEGATE);
 
     //SET EYE COLOR
@@ -454,6 +500,15 @@ if (!$clothing) {
     break;
   }
 
+    //Moth eyes (there will be more)
+    if ('moth' === $species) {
+        $eyes = imagecreatefrompng(ICON_PATH."/human_face/motheyes-".$data->dir.".png");
+        if (null != $eyes) {
+            imagecopy($body, $eyes, 0, 0, 0, 0, 32, 32);
+        }
+        imagedestroy($eyes);
+    }
+
     //HAIR
     if ('human' === $species || ($data->hairStyle == 'debrained' && $clothing)) {
         $hair  = imagecreatefrompng(ICON_PATH."/human_face/".$data->hairStyle."-".$data->dir.".png");
@@ -473,6 +528,27 @@ if (!$clothing) {
         }
         imagedestroy($hair);
     }
+
+    //FACIAL HAIR
+    if ('human' === $species && $data->facial) {
+        $facial  = imagecreatefrompng(ICON_PATH."/human_face/facial_".$data->facial."-".$data->dir.".png");
+        //FACIAL HAIR COLOR
+        $facialColor = str_replace('#', '', $data->facialColor);
+        $output['facialColor'] = $facialColor;
+        $facialColor = str_split($facialColor, 2);
+        foreach ($facialColor as &$c) {
+            $c = 255 - hexdec($c);
+        }
+        imagefilter($facial, IMG_FILTER_NEGATE);
+        imagefilter($facial, IMG_FILTER_COLORIZE, $facialColor[0], $facialColor[1], $facialColor[2], 0);
+        imagefilter($facial, IMG_FILTER_NEGATE);
+
+        if (null != $facial) {
+            imagecopy($body, $facial, 0, 0, 0, 0, 32, 32);
+        }
+        imagedestroy($facial);
+    }
+
 
     //EYEWEAR
     if ($clothing && $data->eyeWear) {
@@ -541,6 +617,26 @@ if (!$clothing) {
         imagedestroy($neck);
     }
 
+    //Moth Wings and Antennae render in FRONT of the body
+    if ('moth' === $species && $data->wings) {
+        $data->wings = str_replace("_BEHIND", "_FRONT", $data->wings);
+        $wings = imagecreatefrompng(ICON_PATH."/moth_wings/".$data->wings."-".$data->dir.".png");
+        if (null != $wings) {
+            imagecopy($body, $wings, 0, 0, 0, 0, 32, 32);
+        }
+        imagedestroy($wings);
+    }
+    if ('moth' === $species && $data->antennae) {
+        $data->antennae = str_replace("_BEHIND", "_FRONT", $data->antennae);
+        $antennae = imagecreatefrompng(ICON_PATH."/moth_antennae/".$data->antennae."-".$data->dir.".png");
+        if (null != $antennae) {
+            imagecopy($body, $antennae, 0, 0, 0, 0, 32, 32);
+        }
+        imagedestroy($antennae);
+    }
+
+
+
 
     //RIGHT HAND
     if ($clothing && $data->rhand) {
@@ -578,6 +674,7 @@ if (!$clothing) {
         imagedestroy($suit);
     }
 
+
     //HELMET
     if ($clothing && $data->head) {
         $head = imagecreatefrompng(ICON_PATH."/clothing/head/".$data->head."-".$data->dir.".png");
@@ -585,6 +682,14 @@ if (!$clothing) {
             imagecopy($body, $head, 0, 0, 0, 0, 32, 32);
         }
         imagedestroy($head);
+    }
+
+    if ($data->hud) {
+        $hud = imagecreatefrompng(ICON_PATH."/hud/hud{$data->hud}-0.png");
+        if (null != $hud) {
+            imagecopy($body, $hud, 0, 0, 0, 0, 32, 32);
+        }
+        imagedestroy($hud);
     }
 }
 
