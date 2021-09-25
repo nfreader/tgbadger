@@ -32,6 +32,8 @@ jobs:
           script: |
             echo "Stashing configuration files..."
             sudo mv /var/www/badger.atlantaned.space/badger/config.php /var/www/badger.atlantaned.space/config.php
+            echo "Stashing generated icons..."
+            sudo mv /var/www/badger.atlantaned.space/public/icons /var/www/badger.atlantaned.space/
             echo "Copying files from staging..."
             sudo rsync -aqz --delete ~/staging/ /var/www/badger.atlantaned.space/badger/
             sudo rm -rf /var/www/badger.atlantaned.space/public/*
@@ -43,6 +45,8 @@ jobs:
             sudo sed -i 's/__DIR__.\"\/..\//__DIR__.\"\/..\/badger\//' /var/www/badger.atlantaned.space/public/icons.php
             sudo sed -i 's/__DIR__.\"\/..\//__DIR__.\"\/..\/badger\//' /var/www/badger.atlantaned.space/public/json_merge.php
             sudo sed -i 's/__DIR__.\"\/..\//__DIR__.\"\/..\/badger\//' /var/www/badger.atlantaned.space/public/img.php
+            echo "Restoring generated icons..."
+            sudo mv /var/www/badger.atlantaned.space/icons /var/www/badger.atlantaned.space/public/
             echo "Restoring file ownership..."
             sudo chown -R www-data:www-data /var/www/badger.atlantaned.space
             echo "Done!"
