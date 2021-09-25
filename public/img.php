@@ -1,11 +1,13 @@
 <?php
 require_once(__DIR__."/../config.php");
-error_reporting(0);
+// error_reporting(0);
 
 header('Content-Type: application/json');
 define("ICON_PATH", OUTPUT_DIR."/mob");
 define("BIO_RESOURCES", __DIR__.'/resources/bio/');
 define("CONSOLAS_FONT", BIO_RESOURCES.'/cascadia.otf');
+
+$colorableSpecies = ["human","lizard","pod","jelly","slime","golem","ethereal","digitrade"];
 
 $args = [
   'bg' => [
@@ -29,6 +31,10 @@ $args = [
     'flags' => FILTER_FLAG_STRIP_HIGH
   ],
   'skinTone' => [
+    'filter' => FILTER_SANITIZE_STRING,
+    'flags' => FILTER_FLAG_STRIP_HIGH
+  ],
+  'skinColor' => [
     'filter' => FILTER_SANITIZE_STRING,
     'flags' => FILTER_FLAG_STRIP_HIGH
   ],
@@ -128,6 +134,10 @@ $args = [
     'filter' => FILTER_SANITIZE_STRING,
     'flags' => FILTER_FLAG_STRIP_HIGH
   ],
+  'digitrade_variant' => [
+    'filter' => FILTER_SANITIZE_STRING,
+    'flags' => FILTER_FLAG_STRIP_HIGH
+  ],
 ];
 
 $data = (object) filter_input_array(INPUT_POST, $args, true);
@@ -144,7 +154,7 @@ $default->facial    = false;
 $default->facialColor  = '#6aa84f';
 $default->eyeWear   = false;
 $default->mask      = false;
-$default->uniform   = '/color/grey_ancient';
+$default->uniform   = false;
 $default->suit      = false;
 $default->head      = false;
 $default->belt      = false;
@@ -161,6 +171,7 @@ $default->stamp     = false;
 $default->wings     = false;
 $default->antennae  = false;
 $default->hud       = false;
+$default->digitrade_variant = 1;
 foreach ($data as $k => $v) {
     if (empty($data->$k) || !isset($data->$k)) {
         $data->$k = $default->$k;
@@ -271,6 +282,9 @@ $path = ICON_PATH."/human_parts_greyscale";
 
 function getSpeciesSprites($species, $gender='male', $dir='0', $path = '')
 {
+    if ('digitrade' === $species) {
+        $species = "lizard";
+    }
     $sprites = array(
     "rArm"=>"$path/".$species."_r_arm-$dir.png",
     "lArm"=>"$path/".$species."_l_arm-$dir.png",
@@ -317,7 +331,17 @@ switch ($data->species) {
 
   case 'lizard':
     $species = 'lizard';
-    // $skinToneOpacity = 50;
+    $skinToneOpacity = 50;
+  break;
+
+  case 'digitrade':
+    $species = 'lizard';
+    $skinToneOpacity = 50;
+    //Custom legs (with variants)
+    $sprites['rLeg'] = "$path/digitigrade_{$data->digitrade_variant}_r_leg-$data->dir.png";
+    $sprites['lLeg'] = "$path/digitigrade_{$data->digitrade_variant}_l_leg-$data->dir.png";
+    //No shoes
+    $data->shoes = false;
   break;
 
   case 'pod':
@@ -327,22 +351,22 @@ switch ($data->species) {
 
   case 'jelly':
     $species = 'jelly';
-    // $skinToneOpacity = 50;
+    $skinToneOpacity = 50;
   break;
 
   case 'slime':
     $species = 'slime';
-    // $skinToneOpacity = 50;
+    $skinToneOpacity = 50;
   break;
 
   case 'golem':
     $species = 'golem';
-    // $skinToneOpacity = 50;
+    $skinToneOpacity = 50;
   break;
 
   case 'snail':
     $species = 'snail';
-    // $skinToneOpacity = 50;
+    $skinToneOpacity = 50;
     //No gender for these sprites
     $sprites['chest'] = "$path/snail_chest-$data->dir.png";
     $sprites['head'] = "$path/snail_head-$data->dir.png";
@@ -360,12 +384,12 @@ switch ($data->species) {
 
   case 'ethereal':
     $species = 'ethereal';
-    // $skinToneOpacity = 50;
+    $skinToneOpacity = 50;
   break;
 
   case 'stargazer':
     $species = 'stargazer';
-    // $skinToneOpacity = 50;
+    $skinToneOpacity = 50;
   break;
 
   case 'moth':
@@ -459,7 +483,11 @@ if (!$clothing) {
 
 
     //SET SKIN TONE
-    $skinTone = $humanSkinTones[$data->skinTone];
+    if ('human' === $species) {
+        $skinTone = $humanSkinTones[$data->skinTone];
+    } else {
+        $skinTone = $data->skinColor;
+    }
     $skinTone = str_replace('#', '', $skinTone);
     $skinTone = str_split($skinTone, 2);
     foreach ($skinTone as &$c) {
@@ -467,7 +495,7 @@ if (!$clothing) {
     }
 
     imagefilter($body, IMG_FILTER_NEGATE);
-    if ('human' === $species) {
+    if (in_array($species, $colorableSpecies)) {
         imagefilter($body, IMG_FILTER_COLORIZE, $skinTone[0], $skinTone[1], $skinTone[2], $skinToneOpacity);
     }
     imagefilter($body, IMG_FILTER_NEGATE);

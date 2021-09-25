@@ -80,6 +80,7 @@ require_once(__DIR__."/../config.php");
       </div>
       <div class="col">
         <input id="json_out" class="form-control"></input>
+        <p class="text-muted small mb-2 mt-2">You'll have to save these images locally; they aren't saved on BadgeR.</p>
       </div>
     </div>
     <hr>
@@ -160,6 +161,7 @@ require_once(__DIR__."/../config.php");
               <select name="species" class="form-control field species">
                 <option value="human">Human</option>
                 <option value="lizard">Lizard</option>
+                <option value="digitrade">Lizard (Digitigrade)</option>
                 <option value="pod">Podperson</option>
                 <option value="jelly">Jellyperson</option>
                 <option value="slime">Slimeperson</option>
@@ -175,7 +177,17 @@ require_once(__DIR__."/../config.php");
               </select>
             </div>
           </div>
-
+          <div class="form-group row" id="digitrade_select">
+            <label for="digitrade_variant" class="col-md-2">Variant</label>
+            <div class="col-md-6">
+              <label class="radio-inline">
+                <input type="radio" name="digitrade_variant" value="1" class='field c'> One
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="digitrade_variant" value="2" class='field c'> Two
+              </label>
+            </div>
+          </div>
           <div class="form-group row">
             <label for="gender" class="col-md-2">Gender</label>
             <div class="col-md-6">
@@ -188,14 +200,20 @@ require_once(__DIR__."/../config.php");
             </div>
           </div>
           <div class="form-group row">
-            <label for="eyeColor" class="col-md-2">Eyecolor</label>
-            <div class="col-md-10">
+            <label for="eyeColor" class="col-md-4">Eyecolor</label>
+            <div class="col-md-8">
               <input type='color' class='form-control field c' name='eyeColor' id='eyeColor' value="#6aa84f">
             </div>
           </div>
-          <div class="form-group row">
-            <label for="skintone" class="col-md-2">Skintone</label>
-            <div class="col-md-10" id="skintone">
+          <div class="form-group row" id="skintone_control">
+            <label for="skintone" class="col-md-4">Skintone</label>
+            <div class="col-md-8" id="skintone">
+            </div>
+          </div>
+          <div class="form-group row" id="skincolor_control">
+            <label for="skinColor" class="col-md-4">Skin Color</label>
+            <div class="col-md-8">
+              <input type='color' class='form-control field c' name='skinColor' id='skinColor' value="#366F81">
             </div>
           </div>
         </div>
@@ -204,9 +222,10 @@ require_once(__DIR__."/../config.php");
         <!-- Second form column -->
         <div class="col-md-6">
           <h3>Accessories</h3>
-          <p class="text-muted small mb-0 mt-2">Start typing the name of the object you want. Can't find what
+          <p class="text-muted small mb-2 mt-2">Start typing the name of the object you want. Can't find what
             you're looking for? Use <a href="https://scrubby.melonmesa.com/icon/search
-" class="link" target="_blank" rel="noopener noreferrer">Scrubby's Icon Search</a></p>
+" class="link" target="_blank" rel="noopener noreferrer">Scrubby's Icon Search</a>. Not all accessories show up on all
+            species.</p>
           <div class="row mb-2">
             <div class="col-md-6">
               <label for="hairStyle" class="form-label d-none">Hair style</label>

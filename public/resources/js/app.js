@@ -1,4 +1,31 @@
-$('#moth').hide();
+var clothedSpecies = [
+  "human",
+  "lizard",
+  "pod",
+  "jelly",
+  "slime",
+  "golem",
+  "digitrade",
+];
+const colorableSpecies = [
+  "lizard",
+  "pod",
+  "jelly",
+  "slime",
+  "golem",
+  "ethereal",
+  "digitrade",
+];
+function arrayContains(needle, arrhaystack) {
+  if (arrhaystack.indexOf(needle) > -1) {
+    return false;
+  }
+  return true;
+}
+
+$("#moth").hide();
+$("#skincolor_control").hide();
+$("#digitrade_select").hide();
 
 var humanSkintones = {
   caucasian1: "#ffe0d1",
@@ -68,10 +95,8 @@ $.typeahead({
   ...typeahead_options,
   input: "#facial",
   matcher: function (item, displayKey) {
-    if (
-      item.display.includes("facial")
-    ) {
-      item.display = item.display.replace(/facial_/,'')
+    if (item.display.includes("facial")) {
+      item.display = item.display.replace(/facial_/, "");
       return true;
     } else {
       return undefined;
@@ -200,6 +225,9 @@ $.typeahead({
   ...typeahead_options,
   input: "#lhand",
   matcher: function (item, key) {
+    if (/64x64/.test(key)) {
+      return false;
+    }
     if (/left/.test(key)) {
       return true;
     } else {
@@ -215,6 +243,9 @@ $.typeahead({
   ...typeahead_options,
   input: "#rhand",
   matcher: function (item, key) {
+    if (/64x64/.test(key)) {
+      return false;
+    }
     if (/right/.test(key)) {
       return true;
     } else {
@@ -231,33 +262,48 @@ $.typeahead({
   input: "#hud",
   source: {
     icons: {
-      data: ['wanted', 'released', 'parolled', 'prisoner', 'incarcerated', 'discharged'],
-    }
+      data: [
+        "wanted",
+        "released",
+        "parolled",
+        "prisoner",
+        "incarcerated",
+        "discharged",
+      ],
+    },
   },
-
 });
 
 //Form processing
-var clothedSpecies = ["human", "lizard", "pod", "jelly", "slime", "golem"];
 
-function arrayContains(needle, arrhaystack) {
-  if (arrhaystack.indexOf(needle) > -1) {
-    return false;
-  }
-  return true;
-}
 $(".field").bind("input propertychange", function (e) {
   // $('#generator').submit();
   var data = {};
   $(".field").each(function () {
     data[$(this).attr("name")] = $(this).val();
   });
-  if ('moth' === data.species) {
-    $('#moth').show();
+  if ("moth" === data.species) {
+    $("#moth").show();
+    $("#skincolor_control").hide();
+    $("#skintone_control").hide();
   } else {
     $("#moth").hide();
   }
+  if (colorableSpecies.includes(data.species)) {
+    $("#skincolor_control").show();
+    $("#skintone_control").hide();
+  }
+  if ("human" === data.species) {
+    $("#skincolor_control").hide();
+    $("#skintone_control").show();
+  }
+  if ("digitrade" === data.species) {
+    $("#digitrade_select").show();
+  } else {
+    $("#digitrade_select").hide();
+  }
   data["gender"] = $("input[name=gender]:checked").val();
+  data["digitrade_variant"] = $("input[name=digitrade_variant]:checked").val();
   data["skinTone"] = $("input[name=skinTone]:checked").val();
   $("#json_out").val(JSON.stringify(data));
   $.ajax({
